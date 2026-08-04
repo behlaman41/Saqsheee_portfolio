@@ -2,11 +2,13 @@
 import { defineConfig } from 'astro/config'
 
 export default defineConfig({
-  // TODO after the first Cloudflare Pages deploy: set this to the live origin
-  // (the *.pages.dev subdomain, or the custom domain once it is attached).
-  // It is only used to make <link rel="canonical"> and og:image absolute.
-  site: 'https://sakshibehl.pages.dev',
+  // Live Worker origin — used for <link rel="canonical"> and og:image.
+  // Update again when a custom domain (e.g. saqsheee.com) is attached.
+  site: 'https://saqsheee-portfolio.behlaman41.workers.dev',
 
+  // Static output bakes <Picture> variants into /_astro/* at build time.
+  // Do not switch to server/hybrid without a Worker that serves /_image —
+  // that is what broke photos on the first Cloudflare deploy.
   output: 'static',
   trailingSlash: 'ignore',
 
@@ -21,6 +23,9 @@ export default defineConfig({
 
   image: {
     // Sharp handles AVIF/WebP/JPEG at build time; nothing is optimised at runtime.
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+    },
     responsiveStyles: false,
   },
 

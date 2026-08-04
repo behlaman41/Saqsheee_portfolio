@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "saqsheee-portfolio",
+  "compatibility_date": "2026-08-04",
+  "account_id": "d055538a5bbf0903662bfc5f1eb8f1c6",
+  // Pure static Astro output — no Worker script. Images must be baked at
+  // `astro build` into /_astro/*; the /_image endpoint does not exist here.
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}
