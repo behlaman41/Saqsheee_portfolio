@@ -2,9 +2,8 @@
 import { defineConfig } from 'astro/config'
 
 export default defineConfig({
-  // Live Worker origin — used for <link rel="canonical"> and og:image.
-  // Update again when a custom domain (e.g. saqsheee.com) is attached.
-  site: 'https://saqsheee-portfolio.behlaman41.workers.dev',
+  // Live origin — used for <link rel="canonical"> and og:image.
+  site: 'https://saqsheee.com',
 
   // Static output bakes <Picture> variants into /_astro/* at build time.
   // Do not switch to server/hybrid without a Worker that serves /_image —
