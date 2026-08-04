@@ -24,6 +24,18 @@ npm run check    # Astro + TypeScript diagnostics
 
 Node 18+ (developed on 22).
 
+Every binary in the repo — the reference bundle, the photos, the reels and their
+posters, the woff2 files — is derived from the originals in `media/`.
+[`scripts/rebuild-assets.sh`](scripts/rebuild-assets.sh) regenerates all of them and is
+the written-down provenance of each:
+
+```bash
+npm install && bash scripts/rebuild-assets.sh && npm run build
+```
+
+It needs `ffmpeg` for the reels and skips that step with a note if it is missing. Re-run
+it any time; it overwrites in place and reproduces the committed files byte-for-byte.
+
 ---
 
 ## Deploy — Cloudflare Pages
