@@ -1,0 +1,53 @@
+---
+import { work, site } from '../data/site'
+---
+
+<!-- ═══════════════ 05 · WORK ═══════════════ -->
+<section class="block wrap" id="work">
+  <div class="sec-head reveal">
+    <span class="mono">{work.head.eyebrow}</span>
+    <span class="mono">{work.head.num}</span>
+  </div>
+  <h2 class="sec-title reveal">
+    <span class="tmask"><span>{work.titleLead}<em>{work.titleAccent}</em></span></span>
+  </h2>
+  <div class="work-grid">
+    {/* Each tile carries its number underneath the video. motion.js primes the
+        poster as the tile approaches the viewport, swaps data-src in when it
+        actually arrives, and removes the <video> outright if the file 404s —
+        leaving the numbered placeholder, as in the reference.
+
+        poster lives in data-poster rather than the real attribute on purpose: a
+        `poster` is fetched eagerly no matter what `preload` says, and these four
+        covers add ~186kB of Medium-priority traffic that competes with the hero
+        image for bandwidth on mobile. */}
+    {
+      work.reels.map((reel, i) => (
+        <a
+          class="reel reveal"
+          data-d={i === 0 ? undefined : String(i)}
+          href={reel.href}
+          target="_blank"
+          rel="noopener"
+          aria-label={reel.label}
+        >
+          <span class="idx">{reel.idx}</span><span class="cap">{work.tileCaption}</span>
+          <video
+            muted
+            loop
+            playsinline
+            preload="none"
+            data-poster={reel.poster}
+            data-src={reel.src}
+          />
+          <span class="chip">↗</span>
+        </a>
+      ))
+    }
+  </div>
+  <div class="work-foot reveal">
+    <a class="link-mono" href={site.instagram} target="_blank" rel="noopener">
+      {work.footLink}
+    </a>
+  </div>
+</section>

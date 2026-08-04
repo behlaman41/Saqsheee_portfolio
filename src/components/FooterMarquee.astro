@@ -1,0 +1,12 @@
+---
+import { footer } from '../data/site'
+
+/* Purely decorative outline lettering — hidden from assistive tech. */
+const copies = Array.from({ length: footer.marqueeRepeat })
+---
+
+<div class="foot-marquee" aria-hidden="true">
+  <div class="foot-track">
+    {copies.map(() => <span class="foot-item">{footer.marqueeWord} <em>—</em> </span>)}
+  </div>
+</div>

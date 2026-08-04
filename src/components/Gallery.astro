@@ -1,0 +1,36 @@
+---
+import { Picture } from 'astro:assets'
+import { gallery } from '../data/site'
+
+/* Each figure spans 4 of 12 columns (20px gaps) inside the 1200px wrap;
+   below 900px the grid is 2-up with 16px gaps. */
+const sizes =
+  '(min-width:1248px) 371px, (min-width:900px) calc((100vw - 268px) / 12 * 4 + 60px), calc((100vw - 64px) / 2)'
+---
+
+<!-- ═══════════════ 03 · GALLERY ═══════════════ -->
+<section class="block wrap" id="gallery">
+  <div class="sec-head reveal">
+    <span class="mono">{gallery.head.eyebrow}</span>
+    <span class="mono">{gallery.head.num}</span>
+  </div>
+  <div class="gal">
+    {
+      gallery.photos.map((photo) => (
+        <figure class="ph" data-parallax={photo.parallax}>
+          <Picture
+            class={photo.ratio}
+            src={photo.src}
+            alt={photo.alt}
+            style={`object-position:${photo.objectPosition}`}
+            widths={[480, 800, 1200]}
+            sizes={sizes}
+            formats={['avif', 'webp']}
+            fallbackFormat="jpg"
+            loading="lazy"
+          />
+        </figure>
+      ))
+    }
+  </div>
+</section>

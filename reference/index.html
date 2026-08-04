@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sakshi Behl — Fashion, Hair &amp; Beauty Creator</title>
+<meta name="description" content="Sakshi Behl (@saqsheee) — fashion, hair & beauty creator in Delhi NCR. 912K monthly reel views. Available for brand collaborations, dedicated reels, product integrations and UGC.">
+<meta property="og:title" content="Sakshi Behl — Fashion, Hair &amp; Beauty Creator">
+<meta property="og:description" content="912K monthly reel views · Delhi NCR. Dedicated reels, product integrations and UGC for brands.">
+<meta property="og:type" content="profile">
+<meta property="og:image" content="og.jpg"><!-- after hosting, change to the full URL, e.g. https://yourdomain.com/og.jpg -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FAF7F2">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" fill="%23FAF7F2"/><text x="32" y="45" font-family="Georgia,serif" font-style="italic" font-size="36" text-anchor="middle" fill="%23A85838">S</text></svg>'>
+<link rel="preload" as="image" href="hero.jpg" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,420;0,9..144,520;1,9..144,340;1,9..144,420&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN TOKENS — edit everything from here
+   ============================================================ */
+:root{
+  --bg:        #FAF7F2;
+  --bg-raise:  #F3EDE3;
+  --ink:       #1A1714;
+  --ink-soft:  #4A4239;
+  --ink-faint: #6E645A;
+  --rule:      #E5DED4;
+  --blush:     #F6EDE7;   /* warm blush band */
+  --accent:    #A85838;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans:  'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  --mono:  'IBM Plex Mono', ui-monospace, monospace;
+  --pad: 24px;
+  --section-gap: clamp(96px, 15vw, 176px);
+  --ease: cubic-bezier(.22,.8,.28,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:var(--sans); font-size:17px; line-height:1.6;
+  -webkit-font-smoothing:antialiased; -webkit-text-size-adjust:100%;
+  overflow-x:hidden;
+}
+a{color:inherit; text-decoration:none}
+img,video{display:block; max-width:100%}
+::selection{background:var(--accent); color:var(--bg)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
+
+.mono{font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase}
+.wrap{max-width:1200px; margin:0 auto; padding-left:var(--pad); padding-right:var(--pad)}
+
+/* ============================================================
+   BLUSH WASHES — soft drifting color behind everything
+   ============================================================ */
+body::before{
+  content:""; position:fixed; inset:-25%; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(52% 38% at 84% 6%,  rgba(201,138,116,.11), transparent 70%),
+    radial-gradient(46% 34% at 4% 48%,  rgba(226,183,166,.13), transparent 70%),
+    radial-gradient(50% 36% at 76% 94%, rgba(201,138,116,.08), transparent 70%);
+  animation:drift 48s ease-in-out infinite alternate;
+}
+@keyframes drift{to{transform:translate3d(2.5%,3%,0) rotate(1.5deg)}}
+
+/* ============================================================
+   GRAIN — page-wide print texture
+   ============================================================ */
+body::after{
+  content:""; position:fixed; inset:-50%; z-index:95; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:.05; mix-blend-mode:multiply;
+}
+
+/* ============================================================
+   PHOTO BLEND — portraits dissolve into the page
+   Apply class "blend" to any <img> shot against a light wall.
+   ============================================================ */
+.blend{
+  mix-blend-mode:multiply;
+  filter:contrast(1.05) saturate(1.02);
+  -webkit-mask-image:radial-gradient(130% 130% at 50% 42%, #000 60%, transparent 96%);
+          mask-image:radial-gradient(130% 130% at 50% 42%, #000 60%, transparent 96%);
+}
+
+/* ============================================================
+   SCROLL PROGRESS + TOPBAR
+   ============================================================ */
+#progress{position:fixed; top:0; left:0; height:2px; width:0; background:var(--accent); z-index:100}
+.topbar{
+  position:sticky; top:0; z-index:90;
+  display:flex; justify-content:space-between; align-items:center; gap:16px;
+  padding:14px var(--pad);
+  background:rgba(250,247,242,.86);
+  background:color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--rule);
+}
+.topbar .mono{font-weight:500}
+.topbar a:hover{color:var(--accent)}
+.topbar .niche{color:var(--ink-faint)}
+@media (max-width:520px){ .topbar .niche{display:none} }
+
+/* ============================================================
+   BUTTONS + LINKS
+   ============================================================ */
+.btn{
+  display:inline-flex; align-items:center; gap:12px;
+  background:var(--ink); color:var(--bg);
+  font-family:var(--mono); font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+  padding:17px 28px; border:1px solid var(--ink);
+  transition:background .35s var(--ease), border-color .35s var(--ease);
+}
+.btn .arr{display:inline-block; transition:transform .35s var(--ease)}
+.btn:hover{background:var(--accent); border-color:var(--accent)}
+.btn:hover .arr{transform:translateX(5px)}
+.link-mono{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-soft); transition:color .3s}
+.link-mono:hover{color:var(--accent)}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{max-width:1200px; margin:0 auto; padding:clamp(20px,4vw,56px) var(--pad) 0}
+.hero-grid{display:grid; grid-template-columns:1fr; gap:8px}
+@media (min-width:900px){
+  .hero-grid{grid-template-columns:1.05fr .95fr; gap:40px; align-items:end}
+}
+.hero-eyebrow{display:flex; align-items:center; gap:14px; color:var(--ink-faint); margin-bottom:22px}
+.hero-eyebrow::before{content:""; width:34px; height:1px; background:var(--accent)}
+.hero h1{
+  font-family:var(--serif); font-weight:420; letter-spacing:-.025em;
+  font-size:clamp(64px, 15.5vw, 148px); line-height:.96;
+}
+.hero h1 em{font-style:italic; font-weight:340; color:var(--accent)}
+.hero-sub{margin-top:26px; max-width:44ch; color:var(--ink-soft); font-size:clamp(17px,2.2vw,19px)}
+.hero-meta{display:flex; flex-wrap:wrap; align-items:center; gap:22px; margin-top:30px}
+.hero-cta-row{display:flex; flex-wrap:wrap; align-items:center; gap:22px; margin-top:34px}
+.hero-figure{position:relative; will-change:transform}
+.hero-figure img{width:100%; aspect-ratio:4/5; object-fit:cover; object-position:50% 20%}
+.hero-figure figcaption{
+  position:absolute; left:6%; bottom:2%;
+  font-family:var(--mono); font-size:10px; letter-spacing:.16em; color:var(--ink-faint);
+}
+.scroll-hint{display:inline-flex; align-items:center; gap:10px; margin-top:44px; color:var(--ink-faint)}
+.scroll-hint span:last-child{display:inline-block; animation:bob 2.2s var(--ease) infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+.load-seq > *{opacity:0; transform:translateY(26px); animation:rise .9s var(--ease) forwards}
+.load-seq > *:nth-child(1){animation-delay:.05s}
+.load-seq > *:nth-child(2){animation-delay:.15s}
+.load-seq > *:nth-child(3){animation-delay:.25s}
+.load-seq > *:nth-child(4){animation-delay:.35s}
+.load-seq > *:nth-child(5){animation-delay:.45s}
+.load-seq > *:nth-child(6){animation-delay:.55s}
+@keyframes rise{to{opacity:1; transform:translateY(0)}}
+.hero-figure{opacity:0; animation:fadein 1.3s .25s var(--ease) forwards}
+@keyframes fadein{to{opacity:1}}
+
+/* ============================================================
+   SECTION HEADER PATTERN
+   ============================================================ */
+section.block{margin-top:var(--section-gap); position:relative; isolation:isolate}
+.band{--bg:var(--blush)}
+.band::before{content:""; position:absolute; inset:-72px -100vmax; z-index:-2; background:var(--blush)}
+.ghost{
+  position:absolute; z-index:-1; pointer-events:none; user-select:none; white-space:nowrap;
+  font-family:var(--serif); font-style:italic; font-weight:340; line-height:1;
+  font-size:clamp(110px, 22vw, 250px); color:rgba(168,88,56,.06);
+}
+.sec-head{display:flex; align-items:baseline; justify-content:space-between; gap:18px; padding-bottom:14px; border-bottom:1px solid var(--rule)}
+.sec-head .mono{color:var(--ink-faint)}
+.sec-title{font-family:var(--serif); font-weight:420; letter-spacing:-.02em; font-size:clamp(30px,5.4vw,52px); line-height:1.08; margin-top:20px}
+.sec-title em{font-style:italic; font-weight:340; color:var(--accent)}
+/* masked line reveal for titles and the pull-quote */
+.tmask{display:block; overflow:hidden}
+.tmask>span{display:block; transform:translateY(112%); transition:transform 1.05s var(--ease) .08s}
+.is-in .tmask>span{transform:none}
+/* photo curtain reveal — wipe uncovers image while it settles from a zoom */
+.ph{position:relative; overflow:hidden}
+.ph img{transform:scale(1.12); transition:transform 1.25s var(--ease) .1s}
+.ph::after{
+  content:""; position:absolute; inset:0; background:var(--bg);
+  transform-origin:top; transition:transform .95s var(--ease);
+}
+.ph.is-in::after{transform:scaleY(0)}
+.ph.is-in img{transform:scale(1)}
+
+/* ============================================================
+   STATS — oversized live counters
+   ============================================================ */
+.stats-grid{display:grid; grid-template-columns:1fr 1fr; margin-top:8px}
+@media (min-width:900px){ .stats-grid{grid-template-columns:repeat(4,1fr)} }
+.stat{padding:34px 20px 30px; border-bottom:1px solid var(--rule); position:relative}
+.stat::before{
+  content:""; position:absolute; top:0; left:20px; width:34px; height:2px; background:var(--accent);
+  transform:scaleX(0); transform-origin:left; transition:transform .8s var(--ease) .35s;
+}
+.stat.is-in::before{transform:scaleX(1)}
+.stat:nth-child(odd){border-right:1px solid var(--rule)}
+@media (min-width:900px){
+  .stat{border-right:1px solid var(--rule); border-bottom:0; padding:44px 26px 8px}
+  .stat::before{left:26px}
+  .stat:last-child{border-right:0}
+}
+.stat-num{
+  font-family:var(--serif); font-weight:420; letter-spacing:-.03em;
+  font-size:clamp(58px, 11vw, 108px); line-height:1;
+  font-variant-numeric:tabular-nums;
+}
+.stat-num sup{font-size:.42em; font-weight:340; color:var(--accent); vertical-align:.62em; letter-spacing:0}
+.stat-label{margin-top:16px; color:var(--ink-faint)}
+.stats-foot{margin-top:26px; color:var(--ink-faint); font-size:14px}
+
+/* ============================================================
+   ABOUT — pull-quote + blended portrait
+   ============================================================ */
+.about-grid{display:grid; grid-template-columns:1fr; gap:40px; margin-top:8px}
+@media (min-width:900px){ .about-grid{grid-template-columns:1.1fr .9fr; gap:64px; align-items:center} }
+.pull{
+  font-family:var(--serif); font-weight:340; letter-spacing:-.015em;
+  font-size:clamp(27px, 4.6vw, 44px); line-height:1.22; margin-top:26px;
+}
+.pull em{font-style:italic; color:var(--accent)}
+.about-copy{margin-top:26px; color:var(--ink-soft); max-width:56ch}
+.about-copy + .about-copy{margin-top:16px}
+.about-figure{position:relative; will-change:transform}
+.about-figure img{width:100%; aspect-ratio:4/5; object-fit:cover; object-position:50% 20%}
+/* photo slot placeholder — delete .slot + inner spans once a real photo is in */
+.slot{
+  display:flex; flex-direction:column; justify-content:space-between;
+  aspect-ratio:4/5; padding:18px; background:var(--bg-raise);
+  border:1px dashed var(--rule);
+}
+.slot .idx{font-family:var(--serif); font-weight:340; font-size:clamp(34px,5vw,52px); color:var(--ink-faint)}
+.slot .cap{font-family:var(--mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-faint)}
+
+/* ============================================================
+   GALLERY — editorial photo strip
+   ============================================================ */
+.gal{display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:34px}
+@media (min-width:900px){
+  .gal{grid-template-columns:repeat(12,1fr); gap:20px; align-items:start}
+  .gal > :nth-child(1){grid-column:1/5; margin-top:56px}
+  .gal > :nth-child(2){grid-column:5/9}
+  .gal > :nth-child(3){grid-column:9/13; margin-top:96px}
+}
+.gal .slot:nth-child(2){aspect-ratio:3/4}
+.gal figure{will-change:transform}
+.gal img{width:100%; object-fit:cover}
+.r45{aspect-ratio:4/5} .r34{aspect-ratio:3/4}
+
+/* ============================================================
+   BRAND MARQUEE
+   ============================================================ */
+.marquee{overflow:hidden; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); margin-top:26px}
+.marquee-track{display:flex; width:max-content; animation:scroll 28s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+@keyframes scroll{to{transform:translateX(-50%)}}
+.marquee-item{
+  display:flex; align-items:center; gap:34px; padding:26px 17px 26px 34px;
+  font-family:var(--mono); font-size:13px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--ink-soft); white-space:nowrap;
+}
+.marquee-item::after{content:"·"; color:var(--accent); font-size:20px}
+
+/* ============================================================
+   WORK — self-hosted video tiles
+   ============================================================ */
+.work-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:34px}
+@media (min-width:900px){ .work-grid{grid-template-columns:repeat(4,1fr); gap:20px} }
+.reel{
+  position:relative; display:flex; flex-direction:column; justify-content:space-between;
+  aspect-ratio:9/16; overflow:hidden; background:var(--ink); color:var(--bg); padding:18px;
+}
+.reel .idx{font-family:var(--serif); font-weight:340; font-size:clamp(40px,7vw,64px); line-height:1; opacity:.9}
+.reel .cap{font-family:var(--mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; opacity:.65}
+.reel video{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  transition:transform .8s var(--ease);
+}
+.reel:hover video{transform:scale(1.04)}
+.reel .chip{
+  position:absolute; right:14px; bottom:14px; z-index:2;
+  display:flex; align-items:center; justify-content:center;
+  width:42px; height:42px; border-radius:50%;
+  background:var(--accent); color:var(--bg); font-size:16px;
+  opacity:0; transform:translateY(10px);
+  transition:opacity .4s var(--ease), transform .4s var(--ease);
+}
+.reel:hover .chip{opacity:1; transform:translateY(0)}
+.work-foot{margin-top:26px}
+
+/* ============================================================
+   SERVICES — interactive rows
+   ============================================================ */
+.svc{display:block; border-bottom:1px solid var(--rule); padding:34px 0; position:relative; z-index:0; transition:padding .4s var(--ease)}
+.svc:first-of-type{border-top:1px solid var(--rule); margin-top:34px}
+.svc-inner{display:grid; grid-template-columns:1fr; gap:10px; align-items:baseline}
+@media (min-width:800px){
+  .svc-inner{grid-template-columns:64px 1fr 1.1fr 40px; gap:28px}
+}
+.svc-idx{font-family:var(--mono); font-size:12px; letter-spacing:.14em; color:var(--ink-faint)}
+.svc h3{font-family:var(--serif); font-weight:420; letter-spacing:-.015em; font-size:clamp(26px,4.4vw,38px); line-height:1.15}
+.svc p{color:var(--ink-soft); max-width:52ch}
+.svc .arr{
+  font-size:22px; color:var(--accent); justify-self:end;
+  transform:translateX(-8px); opacity:.35;
+  transition:transform .4s var(--ease), opacity .4s var(--ease);
+}
+.svc::before{
+  content:""; position:absolute; inset:0 -100vmax; z-index:-1;
+  background:var(--bg-raise); opacity:0; transition:opacity .4s var(--ease);
+}
+.svc:hover::before{opacity:1}
+.svc:hover .arr{transform:translateX(0); opacity:1}
+.svc-foot{margin-top:26px; color:var(--ink-faint); font-size:14px}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact-lede{margin-top:30px; color:var(--ink-soft); max-width:46ch}
+.email{
+  display:inline-block; margin-top:20px;
+  font-family:var(--serif); font-weight:420; letter-spacing:-.02em;
+  font-size:clamp(24px, 5.4vw, 58px); line-height:1.2;
+  overflow-wrap:anywhere;
+  background-image:linear-gradient(var(--accent), var(--accent));
+  background-repeat:no-repeat; background-position:0 100%; background-size:0% 2px;
+  transition:background-size .6s var(--ease), color .4s;
+  padding-bottom:8px;
+}
+.email:hover{background-size:100% 2px; color:var(--accent)}
+.contact-cta{display:flex; flex-wrap:wrap; align-items:center; gap:24px; margin-top:40px}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.foot-marquee{overflow:hidden; margin-top:var(--section-gap); border-top:1px solid var(--rule); padding:34px 0 8px}
+.foot-track{display:flex; width:max-content; animation:scroll 36s linear infinite}
+.foot-item{
+  font-family:var(--serif); font-weight:340; white-space:nowrap;
+  font-size:clamp(72px, 14vw, 160px); line-height:1; padding-right:.45em;
+  color:transparent; -webkit-text-stroke:1px var(--ink-faint);
+}
+.foot-item em{font-style:italic; color:var(--accent); -webkit-text-stroke:0}
+.footer{display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; padding:26px var(--pad) 34px; color:var(--ink-faint)}
+
+/* ============================================================
+   SCROLL REVEALS
+   ============================================================ */
+.reveal{opacity:0; transform:translateY(34px); transition:opacity .9s var(--ease), transform .9s var(--ease)}
+.reveal.is-in{opacity:1; transform:none}
+.reveal[data-d="1"]{transition-delay:.08s}
+.reveal[data-d="2"]{transition-delay:.16s}
+.reveal[data-d="3"]{transition-delay:.24s}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important; transition:none!important}
+  .load-seq>*,.hero-figure,.reveal{opacity:1; transform:none}
+  .tmask>span{transform:none}
+  .ph img{transform:none}
+  .ph::after{display:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- ═══════════════ TOPBAR ═══════════════ -->
+<header class="topbar">
+  <a href="#top" class="mono">Sakshi Behl</a>
+  <span class="mono niche">Fashion · Hair · Beauty</span>
+  <a href="#contact" class="mono" style="color:var(--accent)">Work with me ↗</a>
+</header>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero" id="top">
+  <div class="hero-grid">
+    <div class="load-seq">
+      <p class="hero-eyebrow mono">Creator · Delhi NCR</p>
+      <h1>Sakshi<br><em>Behl</em></h1>
+      <p class="hero-sub">Fashion, hair &amp; beauty content that reaches far beyond its following — 912K reel views in the last 30 days.</p>
+      <div class="hero-meta">
+        <a class="link-mono" href="https://www.instagram.com/saqsheee/" target="_blank" rel="noopener">@saqsheee ↗</a>
+        <span class="mono" style="color:var(--ink-faint)">9.5K+ followers</span>
+      </div>
+      <div class="hero-cta-row">
+        <a class="btn" href="#contact">Work with me <span class="arr">→</span></a>
+        <a class="link-mono" href="#work">See recent work</a>
+      </div>
+      <a class="scroll-hint mono" href="#stats"><span>Scroll</span><span>↓</span></a>
+    </div>
+    <figure class="hero-figure" data-parallax="0.05">
+      <img class="blend" src="hero.jpg" alt="Sakshi Behl seated on an ivory sofa in an embroidered champagne suit" fetchpriority="high">
+      <figcaption>SAKSHI BEHL — 2026</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ═══════════════ 01 · STATS ═══════════════ -->
+<section class="block wrap" id="stats">
+  <span class="ghost" data-parallax="0.07" aria-hidden="true" style="top:-70px; right:-4%">Reach</span>
+  <div class="sec-head reveal">
+    <span class="mono">Last 30 days</span>
+    <span class="mono">01</span>
+  </div>
+  <h2 class="sec-title reveal"><span class="tmask"><span>Small following. <em>Outsized reach.</em></span></span></h2>
+  <div class="stats-grid">
+    <div class="stat reveal"><div class="stat-num"><span class="count" data-target="912">0</span><sup>K</sup></div><div class="stat-label mono">Reel views</div></div>
+    <div class="stat reveal" data-d="1"><div class="stat-num"><span class="count" data-target="728">0</span><sup>K</sup></div><div class="stat-label mono">Accounts reached</div></div>
+    <div class="stat reveal" data-d="2"><div class="stat-num"><span class="count" data-target="10">0</span><sup>K</sup></div><div class="stat-label mono">Saves</div></div>
+    <div class="stat reveal" data-d="3"><div class="stat-num">+<span class="count" data-target="17">0</span><sup>%</sup></div><div class="stat-label mono">Follower growth</div></div>
+  </div>
+  <p class="stats-foot reveal">9.5K+ followers · 20 reels a month · content reaching ~75× her follower base</p>
+</section>
+
+<!-- ═══════════════ 02 · ABOUT ═══════════════ -->
+<section class="block wrap band" id="about">
+  <div class="sec-head reveal">
+    <span class="mono">The creator</span>
+    <span class="mono">02</span>
+  </div>
+  <div class="about-grid">
+    <div>
+      <p class="pull reveal"><span class="tmask"><span>Content people don't just watch — <em>they save.</em></span></span></p>
+      <p class="about-copy reveal">Sakshi makes hair styling, outfit and beauty content from Delhi NCR — the kind viewers bookmark to try themselves. 10K saves in the last month alone.</p>
+      <p class="about-copy reveal" data-d="1">She's worked with brands across haircare, jewellery, skincare and ethnic wear — and the ones who come once tend to come back.</p>
+    </div>
+    <figure class="about-figure ph" data-parallax="0.03">
+      <img class="r45" src="about-saree.jpg" style="object-position:50% 26%" alt="Sakshi in a red silk saree, smiling" loading="lazy">
+    </figure>
+  </div>
+</section>
+
+<!-- ═══════════════ 03 · GALLERY ═══════════════ -->
+<section class="block wrap" id="gallery">
+  <div class="sec-head reveal">
+    <span class="mono">In frame</span>
+    <span class="mono">03</span>
+  </div>
+  <div class="gal">
+    <figure class="ph" data-parallax="0.035">
+      <img class="r45" src="gal-corridor.jpg" style="object-position:50% 30%" alt="Sakshi in a blush lehenga in a candlelit corridor" loading="lazy">
+    </figure>
+    <figure class="ph" data-parallax="0.02">
+      <img class="r34" src="gal-dreamy.jpg" style="object-position:50% 20%" alt="Sakshi smiling in an embellished blush lehenga" loading="lazy">
+    </figure>
+    <figure class="ph" data-parallax="0.05">
+      <img class="r45" src="gal-livingroom.jpg" style="object-position:50% 45%" alt="Sakshi in a pink suit in a bright living room" loading="lazy">
+    </figure>
+  </div>
+</section>
+
+<!-- ═══════════════ 04 · BRANDS ═══════════════ -->
+<section class="block" id="brands">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="mono">Selected collaborations</span>
+      <span class="mono">04</span>
+    </div>
+  </div>
+  <div class="marquee reveal" aria-label="Brands Sakshi has collaborated with">
+    <div class="marquee-track">
+      <span class="marquee-item">BBLUNT</span><span class="marquee-item">Zeraki Jewels</span><span class="marquee-item">Seodre</span><span class="marquee-item">Skince</span><span class="marquee-item">Koskii</span><span class="marquee-item">Ghumar Trend</span>
+      <span class="marquee-item" aria-hidden="true">BBLUNT</span><span class="marquee-item" aria-hidden="true">Zeraki Jewels</span><span class="marquee-item" aria-hidden="true">Seodre</span><span class="marquee-item" aria-hidden="true">Skince</span><span class="marquee-item" aria-hidden="true">Koskii</span><span class="marquee-item" aria-hidden="true">Ghumar Trend</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 05 · WORK ═══════════════ -->
+<section class="block wrap" id="work">
+  <div class="sec-head reveal">
+    <span class="mono">Recent work</span>
+    <span class="mono">05</span>
+  </div>
+  <h2 class="sec-title reveal"><span class="tmask"><span>Reels that <em>travel.</em></span></span></h2>
+  <div class="work-grid">
+    <!-- SELF-HOSTED REELS: export each reel's original MP4, compress to 720p,
+         name them reel-1.mp4 … reel-4.mp4 and place next to this file.
+         They lazy-load and autoplay muted when scrolled into view.
+         Optional: add poster="cover-1.jpg" to each <video> for instant paint.
+         Until the files exist, the numbered tile shows instead. -->
+    <a class="reel reveal" href="https://www.instagram.com/reel/DXKDqctAHn6/" target="_blank" rel="noopener" aria-label="Watch reel 1 on Instagram">
+      <span class="idx">01</span><span class="cap">Tap to watch ↗</span>
+      <video muted loop playsinline preload="none" data-src="reel-1.mp4"></video>
+      <span class="chip">↗</span>
+    </a>
+    <a class="reel reveal" data-d="1" href="https://www.instagram.com/reel/DXT7A5UgHin/" target="_blank" rel="noopener" aria-label="Watch reel 2 on Instagram">
+      <span class="idx">02</span><span class="cap">Tap to watch ↗</span>
+      <video muted loop playsinline preload="none" data-src="reel-2.mp4"></video>
+      <span class="chip">↗</span>
+    </a>
+    <a class="reel reveal" data-d="2" href="https://www.instagram.com/reel/DXrkvoVArfO/" target="_blank" rel="noopener" aria-label="Watch reel 3 on Instagram">
+      <span class="idx">03</span><span class="cap">Tap to watch ↗</span>
+      <video muted loop playsinline preload="none" data-src="reel-3.mp4"></video>
+      <span class="chip">↗</span>
+    </a>
+    <a class="reel reveal" data-d="3" href="https://www.instagram.com/reel/DZzjS6JgP-0/" target="_blank" rel="noopener" aria-label="Watch reel 4 on Instagram">
+      <span class="idx">04</span><span class="cap">Tap to watch ↗</span>
+      <video muted loop playsinline preload="none" data-src="reel-4.mp4"></video>
+      <span class="chip">↗</span>
+    </a>
+  </div>
+  <div class="work-foot reveal"><a class="link-mono" href="https://www.instagram.com/saqsheee/" target="_blank" rel="noopener">View all on Instagram ↗</a></div>
+</section>
+
+<!-- ═══════════════ 06 · SERVICES ═══════════════ -->
+<section class="block wrap" id="services">
+  <span class="ghost" data-parallax="0.07" aria-hidden="true" style="top:-60px; left:-3%">Create</span>
+  <div class="sec-head reveal">
+    <span class="mono">What I offer</span>
+    <span class="mono">06</span>
+  </div>
+  <h2 class="sec-title reveal"><span class="tmask"><span>Three ways to <em>work together.</em></span></span></h2>
+
+  <a class="svc reveal" href="#contact">
+    <div class="svc-inner">
+      <span class="svc-idx">(A)</span>
+      <h3>Dedicated Reels</h3>
+      <p>Full concept-to-post branded content on my page — scripted, shot and styled around your product.</p>
+      <span class="arr">→</span>
+    </div>
+  </a>
+  <a class="svc reveal" href="#contact">
+    <div class="svc-inner">
+      <span class="svc-idx">(B)</span>
+      <h3>Product Integration</h3>
+      <p>Your product woven naturally into my hair and fashion styling content, where my audience already is.</p>
+      <span class="arr">→</span>
+    </div>
+  </a>
+  <a class="svc reveal" href="#contact">
+    <div class="svc-inner">
+      <span class="svc-idx">(C)</span>
+      <h3>UGC Content</h3>
+      <p>Ready-to-use video content for your brand's own channels and ads — no posting on my page required.</p>
+      <span class="arr">→</span>
+    </div>
+  </a>
+  <p class="svc-foot reveal">Available for shoots across Delhi NCR.</p>
+</section>
+
+<!-- ═══════════════ 07 · CONTACT ═══════════════ -->
+<section class="block wrap" id="contact" style="scroll-margin-top:72px">
+  <span class="ghost" data-parallax="0.07" aria-hidden="true" style="top:-50px; right:-2%">Hello</span>
+  <div class="sec-head reveal">
+    <span class="mono">Let's collaborate</span>
+    <span class="mono">07</span>
+  </div>
+  <h2 class="sec-title reveal"><span class="tmask"><span>Have a product my audience <em>should see?</em></span></span></h2>
+  <p class="contact-lede reveal">For partnerships, campaigns and UGC briefs, reach me directly — I reply within a day.</p>
+  <a class="email reveal" href="mailto:collabwithsaqsheee@gmail.com?subject=Collaboration%20enquiry%20%E2%80%94%20via%20sakshibehl%20site">collabwithsaqsheee@gmail.com</a>
+  <div class="contact-cta reveal">
+    <a class="btn" href="mailto:collabwithsaqsheee@gmail.com?subject=Collaboration%20enquiry%20%E2%80%94%20via%20sakshibehl%20site">Work with me <span class="arr">→</span></a>
+    <a class="link-mono" href="https://www.instagram.com/saqsheee/" target="_blank" rel="noopener">DM on Instagram ↗</a>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<div class="foot-marquee" aria-hidden="true">
+  <div class="foot-track">
+    <span class="foot-item">Saqsheee <em>—</em> </span>
+    <span class="foot-item">Saqsheee <em>—</em> </span>
+    <span class="foot-item">Saqsheee <em>—</em> </span>
+    <span class="foot-item">Saqsheee <em>—</em> </span>
+  </div>
+</div>
+<footer class="footer">
+  <span class="mono">© 2026 Sakshi Behl</span>
+  <span class="mono">Fashion · Hair · Beauty — Delhi NCR</span>
+</footer>
+
+<script>
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ── scroll progress + parallax (one rAF loop) ── */
+const bar = document.getElementById('progress');
+const plx = [...document.querySelectorAll('[data-parallax]')];
+let ticking = false;
+const skewEls = [...document.querySelectorAll('.marquee, .foot-marquee')];
+let lastY = scrollY, vel = 0;
+function onScroll(){
+  if (ticking) return; ticking = true;
+  requestAnimationFrame(() => {
+    const h = document.documentElement;
+    bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+    if (!reduce) {
+      for (const el of plx) {
+        const r = el.getBoundingClientRect();
+        const mid = r.top + r.height/2 - innerHeight/2;
+        el.style.transform = `translateY(${(-mid * +el.dataset.parallax).toFixed(1)}px)`;
+      }
+      vel = vel * .82 + (scrollY - lastY) * .18;
+      lastY = scrollY;
+      const skew = Math.max(-3.2, Math.min(3.2, vel * .09));
+      for (const el of skewEls) el.style.transform = `skewX(${skew.toFixed(2)}deg)`;
+      if (Math.abs(vel) > .08) { ticking = false; onScroll(); return; }
+    }
+    ticking = false;
+  });
+}
+addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+
+/* ── reveals + counters ── */
+const io = new IntersectionObserver(entries => {
+  for (const e of entries) if (e.isIntersecting) {
+    e.target.classList.add('is-in');
+    if (e.target.querySelector?.('.count')) runCounters(e.target);
+    io.unobserve(e.target);
+  }
+}, {threshold:.18});
+document.querySelectorAll('.reveal, .ph').forEach(el => io.observe(el));
+
+function runCounters(scope){
+  scope.querySelectorAll('.count').forEach(el => {
+    const target = +el.dataset.target;
+    if (reduce) { el.textContent = target; return; }
+    const t0 = performance.now(), dur = 1300;
+    (function tick(t){
+      const p = Math.min((t - t0) / dur, 1);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 4)));
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+  });
+}
+
+/* ── optional stats.json override (edit stats.json to update numbers, no HTML changes) ── */
+fetch('stats.json').then(r => r.ok ? r.json() : null).then(s => {
+  if (!s) return;
+  const ids = ['views','reached','saves','growth'];
+  document.querySelectorAll('.count').forEach((el, i) => {
+    const v = s[ids[i]];
+    if (v == null) return;
+    el.dataset.target = v;
+    if (el.closest('.is-in')) el.textContent = v;
+  });
+  const foot = document.querySelector('.stats-foot');
+  if (s.footnote && foot) foot.textContent = s.footnote;
+}).catch(() => {});
+
+/* ── reel videos: lazy-load + play in view, pause out of view ── */
+const vio = new IntersectionObserver(entries => {
+  for (const e of entries) {
+    const v = e.target;
+    if (e.isIntersecting) {
+      if (!v.src && v.dataset.src) v.src = v.dataset.src;
+      v.play().catch(() => {});
+    } else if (v.src) v.pause();
+  }
+}, {threshold:.35});
+document.querySelectorAll('.reel video').forEach(v => {
+  v.addEventListener('error', () => v.remove(), {once:true});  /* missing file → tile stays */
+  vio.observe(v);
+});
+</script>
+</body>
+</html>

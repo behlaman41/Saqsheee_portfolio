@@ -1,0 +1,44 @@
+---
+import { Picture } from 'astro:assets'
+import { about } from '../data/site'
+
+/* .9fr column of a 1.1fr/.9fr grid (64px gap) inside the 1200px wrap. */
+const sizes =
+  '(min-width:1248px) 490px, (min-width:900px) calc((100vw - 112px) * 0.45), calc(100vw - 48px)'
+const photo = about.photo
+---
+
+<!-- ═══════════════ 02 · ABOUT ═══════════════ -->
+<section class="block wrap band" id="about">
+  <div class="sec-head reveal">
+    <span class="mono">{about.head.eyebrow}</span>
+    <span class="mono">{about.head.num}</span>
+  </div>
+  <div class="about-grid">
+    <div>
+      <p class="pull reveal">
+        <span class="tmask"><span>{about.pullLead}<em>{about.pullAccent}</em></span></span>
+      </p>
+      {
+        about.paragraphs.map((copy, i) => (
+          <p class="about-copy reveal" data-d={i === 0 ? undefined : String(i)}>
+            {copy}
+          </p>
+        ))
+      }
+    </div>
+    <figure class="about-figure ph" data-parallax={photo.parallax}>
+      <Picture
+        class={photo.ratio}
+        src={photo.src}
+        alt={photo.alt}
+        style={`object-position:${photo.objectPosition}`}
+        widths={[480, 800, 1200]}
+        sizes={sizes}
+        formats={['avif', 'webp']}
+        fallbackFormat="jpg"
+        loading="lazy"
+      />
+    </figure>
+  </div>
+</section>

@@ -1,0 +1,36 @@
+---
+import { statsSection as s } from '../data/site'
+
+/* Reveal delay classes: first tile undelayed, then 1/2/3. */
+const delay = (i: number) => (i === 0 ? undefined : String(i))
+---
+
+<!-- ═══════════════ 01 · STATS ═══════════════ -->
+<section class="block wrap" id="stats">
+  <span class="ghost" data-parallax="0.07" aria-hidden="true" style={s.ghostStyle}>{s.ghost}</span>
+  <div class="sec-head reveal">
+    <span class="mono">{s.head.eyebrow}</span>
+    <span class="mono">{s.head.num}</span>
+  </div>
+  <h2 class="sec-title reveal">
+    <span class="tmask"><span>{s.titleLead}<em>{s.titleAccent}</em></span></span>
+  </h2>
+  <div class="stats-grid">
+    {
+      s.items.map((stat, i) => (
+        <div class="stat reveal" data-d={delay(i)}>
+          <div class="stat-num">
+            {stat.prefix}
+            {/* data-key lets motion.js match stats.json by name, not DOM order */}
+            <span class="count" data-key={stat.key} data-target={stat.target}>
+              0
+            </span>
+            <sup>{stat.unit}</sup>
+          </div>
+          <div class="stat-label mono">{stat.label}</div>
+        </div>
+      ))
+    }
+  </div>
+  <p class="stats-foot reveal">{s.footnote}</p>
+</section>
