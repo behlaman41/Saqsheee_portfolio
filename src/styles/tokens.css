@@ -1,0 +1,19 @@
+/* ============================================================
+   DESIGN TOKENS — edit everything from here
+   ============================================================ */
+:root{
+  --bg:        #FAF7F2;
+  --bg-raise:  #F3EDE3;
+  --ink:       #1A1714;
+  --ink-soft:  #4A4239;
+  --ink-faint: #6E645A;
+  --rule:      #E5DED4;
+  --blush:     #F6EDE7;   /* warm blush band */
+  --accent:    #A85838;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans:  'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  --mono:  'IBM Plex Mono', ui-monospace, monospace;
+  --pad: 24px;
+  --section-gap: clamp(96px, 15vw, 176px);
+  --ease: cubic-bezier(.22,.8,.28,1);
+}

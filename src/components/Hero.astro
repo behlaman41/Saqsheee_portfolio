@@ -1,0 +1,61 @@
+---
+import { Picture } from 'astro:assets'
+import { hero, site } from '../data/site'
+
+/* Hero figure sits in the .95fr column of a 1.05fr/.95fr grid (40px gap)
+   inside the 1200px wrap, and goes full-bleed below 900px. */
+const sizes =
+  '(min-width:1248px) 528px, (min-width:900px) calc((100vw - 88px) * 0.475), calc(100vw - 48px)'
+
+/* hero.jpg is 1400px wide; without this the no-srcset fallback <img src> would
+   be a 295kB full-size JPEG nobody downloads. Cap it at the largest width we
+   actually offer. CSS sets aspect-ratio:4/5 regardless, so this does not
+   change layout. */
+const fallbackWidth = 1200
+
+/* Two invariants worth knowing before editing the markup below:
+   · .load-seq staggers its SIX direct children on load (nth-child 1–6 in
+     global.css). Adding or removing one silently drops it from the sequence.
+   · .blend on the hero <img> is mix-blend-mode:multiply against the page
+     background. <Picture> wraps it in a <picture>, which global.css sets to
+     display:block — block does not open a stacking context, so the blend still
+     reaches <body>. Do not give that wrapper a transform, filter, opacity or
+     isolation, or the hero will visibly detach from the background. */
+---
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero" id="top">
+  <div class="hero-grid">
+    <div class="load-seq">
+      <p class="hero-eyebrow mono">{hero.eyebrow}</p>
+      <h1>{hero.titleTop}<br /><em>{hero.titleBottom}</em></h1>
+      <p class="hero-sub">{hero.sub}</p>
+      <div class="hero-meta">
+        <a class="link-mono" href={site.instagram} target="_blank" rel="noopener">
+          {hero.handleLink}
+        </a>
+        <span class="mono" style="color:var(--ink-faint)">{hero.followers}</span>
+      </div>
+      <div class="hero-cta-row">
+        <a class="btn" href="#contact">{hero.ctaPrimary} <span class="arr">→</span></a>
+        <a class="link-mono" href="#work">{hero.ctaSecondary}</a>
+      </div>
+      <a class="scroll-hint mono" href="#stats"><span>{hero.scrollHint}</span><span>↓</span></a>
+    </div>
+    <figure class="hero-figure" data-parallax={hero.photo.parallax}>
+      <Picture
+        class="blend"
+        src={hero.photo.src}
+        alt={hero.photo.alt}
+        width={fallbackWidth}
+        widths={[480, 800, 1200]}
+        sizes={sizes}
+        formats={['avif', 'webp']}
+        fallbackFormat="jpg"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <figcaption>{hero.caption}</figcaption>
+    </figure>
+  </div>
+</section>

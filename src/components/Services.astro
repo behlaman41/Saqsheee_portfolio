@@ -1,0 +1,31 @@
+---
+import { services } from '../data/site'
+---
+
+<!-- ═══════════════ 06 · SERVICES ═══════════════ -->
+<section class="block wrap" id="services">
+  <span class="ghost" data-parallax="0.07" aria-hidden="true" style={services.ghostStyle}>
+    {services.ghost}
+  </span>
+  <div class="sec-head reveal">
+    <span class="mono">{services.head.eyebrow}</span>
+    <span class="mono">{services.head.num}</span>
+  </div>
+  <h2 class="sec-title reveal">
+    <span class="tmask"><span>{services.titleLead}<em>{services.titleAccent}</em></span></span>
+  </h2>
+
+  {
+    services.items.map((item) => (
+      <a class="svc reveal" href="#contact">
+        <div class="svc-inner">
+          <span class="svc-idx">{item.idx}</span>
+          <h3>{item.title}</h3>
+          <p>{item.copy}</p>
+          <span class="arr">→</span>
+        </div>
+      </a>
+    ))
+  }
+  <p class="svc-foot reveal">{services.footnote}</p>
+</section>

@@ -1,0 +1,25 @@
+---
+import { contact, site, mailto } from '../data/site'
+---
+
+<!-- ═══════════════ 07 · CONTACT ═══════════════ -->
+<section class="block wrap" id="contact" style="scroll-margin-top:72px">
+  <span class="ghost" data-parallax="0.07" aria-hidden="true" style={contact.ghostStyle}>
+    {contact.ghost}
+  </span>
+  <div class="sec-head reveal">
+    <span class="mono">{contact.head.eyebrow}</span>
+    <span class="mono">{contact.head.num}</span>
+  </div>
+  <h2 class="sec-title reveal">
+    <span class="tmask"><span>{contact.titleLead}<em>{contact.titleAccent}</em></span></span>
+  </h2>
+  <p class="contact-lede reveal">{contact.lede}</p>
+  <a class="email reveal" href={mailto}>{site.email}</a>
+  <div class="contact-cta reveal">
+    <a class="btn" href={mailto}>{contact.cta} <span class="arr">→</span></a>
+    <a class="link-mono" href={site.instagram} target="_blank" rel="noopener">
+      {contact.dmLink}
+    </a>
+  </div>
+</section>

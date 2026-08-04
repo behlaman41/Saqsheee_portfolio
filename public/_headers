@@ -1,0 +1,27 @@
+# Cloudflare Pages headers.
+# https://developers.cloudflare.com/pages/configuration/headers/
+
+# Content-hashed by the build — safe to cache forever.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Vendored woff2 files, versioned by name.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Reels change only when the files are replaced; a week keeps repeat visits cheap
+# without stranding a swap for long.
+/reels/*
+  Cache-Control: public, max-age=604800
+
+# The monthly numbers. Must stay short so an edit shows up the same day.
+/stats.json
+  Cache-Control: public, max-age=300, must-revalidate
+
+/og.jpg
+  Cache-Control: public, max-age=86400
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Cache-Control: public, max-age=0, must-revalidate
