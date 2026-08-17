@@ -1,5 +1,9 @@
 ---
 import { work, site } from '../data/site'
+
+/* Second pass mirrors the first so the track can loop without a jump.
+   Decorative copies are hidden from assistive tech. */
+const passes = [false, true]
 ---
 
 <!-- ═══════════════ 05 · WORK ═══════════════ -->
@@ -11,39 +15,45 @@ import { work, site } from '../data/site'
   <h2 class="sec-title reveal">
     <span class="tmask"><span>{work.titleLead}<em>{work.titleAccent}</em></span></span>
   </h2>
-  <div class="work-grid">
-    {/* Each tile carries its number underneath the video. motion.js primes the
-        poster as the tile approaches the viewport, swaps data-src in when it
-        actually arrives, and removes the <video> outright if the file 404s —
-        leaving the numbered placeholder, as in the reference.
-
-        poster lives in data-poster rather than the real attribute on purpose: a
-        `poster` is fetched eagerly no matter what `preload` says, and these four
-        covers add ~186kB of Medium-priority traffic that competes with the hero
-        image for bandwidth on mobile. */}
-    {
-      work.reels.map((reel, i) => (
-        <a
-          class="reel reveal"
-          data-d={i === 0 ? undefined : String(i)}
-          href={reel.href}
-          target="_blank"
-          rel="noopener"
-          aria-label={reel.label}
-        >
-          <span class="idx">{reel.idx}</span><span class="cap">{work.tileCaption}</span>
-          <video
-            muted
-            loop
-            playsinline
-            preload="none"
-            data-poster={reel.poster}
-            data-src={reel.src}
-          />
-          <span class="chip">↗</span>
-        </a>
-      ))
-    }
+  {/* Continuous marquee: three-ish tiles on desktop, a peek of the next on
+      every breakpoint. motion.js eases the cruise so it never announces a
+      start or an end. Posters stay in data-poster so they don't contend with
+      the hero on first paint. */}
+  <div
+    class="work-carousel reveal"
+    data-reel-carousel
+    tabindex="0"
+    aria-label={work.carouselLabel}
+  >
+    <div class="work-track">
+      {
+        passes.map((decorative) =>
+          work.reels.map((reel) => (
+            <a
+              class="reel"
+              href={reel.href}
+              target="_blank"
+              rel="noopener"
+              draggable="false"
+              aria-label={reel.label}
+              aria-hidden={decorative ? 'true' : undefined}
+              tabindex={decorative ? -1 : undefined}
+            >
+              <span class="idx">{reel.idx}</span><span class="cap">{work.tileCaption}</span>
+              <video
+                muted
+                loop
+                playsinline
+                preload="none"
+                data-poster={reel.poster}
+                data-src={reel.src}
+              />
+              <span class="chip">↗</span>
+            </a>
+          ))
+        )
+      }
+    </div>
   </div>
   <div class="work-foot reveal">
     <a class="link-mono" href={site.instagram} target="_blank" rel="noopener">

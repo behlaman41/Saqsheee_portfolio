@@ -1,24 +1,26 @@
 ---
 import { brands } from '../data/site'
 
-/* The track scrolls to -50%, so the list is rendered twice; the second copy
-   is decorative and hidden from assistive tech. */
+/* One half of the track is wide enough for large screens; the second half
+   mirrors it so translateX(-50%) loops seamlessly. Decorative pass is hidden
+   from assistive tech. */
+const strip = [...brands.names, ...brands.names, ...brands.names]
 const passes = [false, true]
 ---
 
 <!-- ═══════════════ 04 · BRANDS ═══════════════ -->
-<section class="block" id="brands">
+<section class="block brands" id="brands">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="mono">{brands.head.eyebrow}</span>
       <span class="mono">{brands.head.num}</span>
     </div>
   </div>
-  <div class="marquee reveal" aria-label={brands.marqueeLabel}>
+  <div class="marquee" aria-label={brands.marqueeLabel}>
     <div class="marquee-track">
       {
         passes.map((decorative) =>
-          brands.names.map((name) => (
+          strip.map((name) => (
             <span class="marquee-item" aria-hidden={decorative ? 'true' : undefined}>
               {name}
             </span>

@@ -46,10 +46,15 @@ else
   mkdir -p public/reels
   i=1
   for src in media/videos/clip-01.mp4 media/videos/clip-02.mp4 \
-             media/videos/clip-03.mp4 media/videos/clip-04.mp4; do
+             media/videos/clip-03.mp4 media/videos/clip-04.mp4 \
+             media/videos/clip-05.mp4 media/videos/clip-06.mp4 \
+             media/videos/clip-07.mp4; do
     [ -f "$src" ] || die "$src is missing"
     echo "  [$i] $src -> public/reels/reel-$i.mp4"
-    ffmpeg -y -loglevel error -i "$src" \
+    # clip-06 opens on Instagram's in-app music picker; skip that overlay.
+    extra=()
+    if [ "$src" = "media/videos/clip-06.mp4" ]; then extra=(-ss 2.8); fi
+    ffmpeg -y -loglevel error "${extra[@]}" -i "$src" \
       -vf "scale='if(gt(iw,ih),-2,720)':'if(gt(iw,ih),720,-2)':flags=lanczos" \
       -c:v libx264 -profile:v main -level 4.0 -pix_fmt yuv420p \
       -crf 26 -preset slow -g 60 \

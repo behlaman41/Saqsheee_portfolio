@@ -1,10 +1,20 @@
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{
+  scroll-behavior:smooth;
+  overflow-x:hidden;
+  overscroll-behavior-x:none;
+  -webkit-text-size-adjust:100%;
+  touch-action:pan-x pan-y;
+}
 body{
   background:var(--bg); color:var(--ink);
   font-family:var(--sans); font-size:17px; line-height:1.6;
   -webkit-font-smoothing:antialiased; -webkit-text-size-adjust:100%;
   overflow-x:hidden;
+  overscroll-behavior-x:none;
+  touch-action:pan-x pan-y;
+  /* Keep fixed washes from expanding the scrollable/zoomable area on iOS. */
+  position:relative;
 }
 a{color:inherit; text-decoration:none}
 img,video{display:block; max-width:100%}
@@ -226,24 +236,72 @@ section.block{margin-top:var(--section-gap); position:relative; isolation:isolat
 .r45{aspect-ratio:4/5} .r34{aspect-ratio:3/4}
 
 /* ============================================================
-   BRAND MARQUEE
+   BRAND MARQUEE — endless horizontal loop on ivory ground
    ============================================================ */
-.marquee{overflow:hidden; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); margin-top:26px}
-.marquee-track{display:flex; width:max-content; animation:scroll 28s linear infinite}
+.marquee{
+  overflow:hidden;
+  width:100%;
+  margin-top:26px;
+  -webkit-mask-image:linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  mask-image:linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+.marquee-track{
+  display:flex;
+  width:max-content;
+  will-change:transform;
+  animation:marquee-scroll 32s linear infinite;
+}
 .marquee:hover .marquee-track{animation-play-state:paused}
-@keyframes scroll{to{transform:translateX(-50%)}}
+@keyframes marquee-scroll{
+  from{transform:translate3d(0,0,0)}
+  to{transform:translate3d(-50%,0,0)}
+}
 .marquee-item{
   display:flex; align-items:center; gap:34px; padding:26px 17px 26px 34px;
-  font-family:var(--mono); font-size:13px; letter-spacing:.2em; text-transform:uppercase;
-  color:var(--ink-soft); white-space:nowrap;
+  font-family:var(--mono); font-size:13px; font-weight:500; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--ink); white-space:nowrap;
 }
 .marquee-item::after{content:"·"; color:var(--accent); font-size:20px}
 
 /* ============================================================
-   WORK — self-hosted video tiles
+   WORK — infinite reel marquee
+   A sliver of the next tile always peeks in, so the strip reads as
+   continuous rather than a paged set of N.
    ============================================================ */
-.work-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:34px}
-@media (min-width:900px){ .work-grid{grid-template-columns:repeat(4,1fr); gap:20px} }
+.work-carousel{
+  --reel-gap: 12px;
+  --reel-shown: 1.18;
+  container-type: inline-size;
+  overflow: hidden;
+  margin-top: 34px;
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+}
+.work-carousel:active{cursor:grabbing}
+.work-carousel:focus-visible{outline:2px solid var(--accent); outline-offset:4px}
+@media (min-width:640px){ .work-carousel{ --reel-gap: 16px; --reel-shown: 2.14; } }
+@media (min-width:900px){ .work-carousel{ --reel-gap: 20px; --reel-shown: 3.18; } }
+.work-track{
+  display: flex;
+  gap: var(--reel-gap);
+  will-change: transform;
+}
+.work-track .reel{
+  flex: 0 0 calc((100cqi - var(--reel-gap) * (var(--reel-shown) - 1)) / var(--reel-shown));
+}
+.work-carousel.is-static{
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  cursor: auto;
+  touch-action: pan-x pan-y;
+}
+.work-carousel.is-static .work-track{transform:none!important}
+.work-carousel.is-static .reel[aria-hidden="true"]{display:none}
+.work-carousel.is-static .reel{scroll-snap-align:start}
 .reel{
   position:relative; display:flex; flex-direction:column; justify-content:space-between;
   aspect-ratio:9/16; overflow:hidden; background:var(--ink); color:var(--bg); padding:18px;
@@ -309,17 +367,37 @@ section.block{margin-top:var(--section-gap); position:relative; isolation:isolat
 .contact-cta{display:flex; flex-wrap:wrap; align-items:center; gap:24px; margin-top:40px}
 
 /* ============================================================
-   FOOTER
+   FOOTER — blush brand strip, solid italic accent lettering
    ============================================================ */
-.foot-marquee{overflow:hidden; margin-top:var(--section-gap); border-top:1px solid var(--rule); padding:34px 0 8px}
-.foot-track{display:flex; width:max-content; animation:scroll 36s linear infinite}
-.foot-item{
-  font-family:var(--serif); font-weight:340; white-space:nowrap;
-  font-size:clamp(72px, 14vw, 160px); line-height:1; padding-right:.45em;
-  color:transparent; -webkit-text-stroke:1px var(--ink-faint);
+.foot-marquee{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  margin-top:var(--section-gap);
+  padding:48px 0 22px;
+  border-top:1px solid color-mix(in srgb, var(--accent) 22%, var(--rule));
 }
-.foot-item em{font-style:italic; color:var(--accent); -webkit-text-stroke:0}
-.footer{display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; padding:26px var(--pad) 34px; color:var(--ink-faint)}
+.foot-marquee::before{
+  content:"";
+  position:absolute;
+  inset:0 -100vmax;
+  z-index:-1;
+  background:var(--blush);
+}
+.foot-track{display:flex; width:max-content; animation:marquee-scroll 36s linear infinite}
+.foot-item{
+  font-family:var(--serif);
+  font-style:italic;
+  font-weight:340;
+  white-space:nowrap;
+  font-size:clamp(72px, 14vw, 160px);
+  line-height:1;
+  padding-right:.45em;
+  color:var(--accent);
+}
+.foot-item em{font-style:italic; color:var(--accent); opacity:.55}
+.footer{display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; padding:26px var(--pad) 34px; color:var(--ink-faint); background:var(--blush)}
+
 
 /* ============================================================
    SCROLL REVEALS

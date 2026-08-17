@@ -108,7 +108,7 @@ export const hero = {
   titleBottom: 'Behl',
   sub: 'Fashion, hair & beauty content that reaches far beyond its following — 912K reel views in the last 30 days.',
   handleLink: `${site.handle} ↗`,
-  followers: '9.5K+ followers',
+  followers: '10.9K+ followers',
   ctaPrimary: 'Work with me',
   ctaSecondary: 'See recent work',
   scrollHint: 'Scroll',
@@ -130,7 +130,7 @@ export const statsSection = {
   titleLead: 'Small following. ',
   titleAccent: 'Outsized reach.',
   footnote:
-    '9.5K+ followers · 20 reels a month · content reaching ~75× her follower base',
+    '10.9K+ followers · 20 reels a month · content reaching ~75× my follower base',
   items: [
     { key: 'views', target: 912, unit: 'K', label: 'Reel views' },
     { key: 'reached', target: 728, unit: 'K', label: 'Accounts reached' },
@@ -142,12 +142,12 @@ export const statsSection = {
 /* ── 02 · about ──────────────────────────────────────────── */
 
 export const about = {
-  head: { eyebrow: 'The creator', num: '02' } satisfies SectionHead,
-  pullLead: "Content people don't just watch — ",
+  head: { eyebrow: 'About me', num: '02' } satisfies SectionHead,
+  pullLead: "I make content people don't just watch — ",
   pullAccent: 'they save.',
   paragraphs: [
-    'Sakshi makes hair styling, outfit and beauty content from Delhi NCR — the kind viewers bookmark to try themselves. 10K saves in the last month alone.',
-    "She's worked with brands across haircare, jewellery, skincare and ethnic wear — and the ones who come once tend to come back.",
+    'I create hair styling, outfit and beauty content from Delhi NCR — the kind viewers bookmark to try themselves. 10K saves in the last month alone.',
+    "I've worked with brands across haircare, jewellery, skincare and ethnic wear — and the ones who come once tend to come back.",
   ],
   photo: {
     src: aboutImg,
@@ -172,8 +172,8 @@ export const gallery = {
     },
     {
       src: galDreamy,
-      alt: 'Sakshi smiling in an embellished blush lehenga',
-      objectPosition: '50% 20%',
+      alt: 'Sakshi twirling in a white embroidered lehenga in a candlelit hallway',
+      objectPosition: '50% 28%',
       ratio: 'r34',
       parallax: 0.02,
     },
@@ -190,8 +190,8 @@ export const gallery = {
 /* ── 04 · brands ─────────────────────────────────────────── */
 
 export const brands = {
-  head: { eyebrow: 'Selected collaborations', num: '04' } satisfies SectionHead,
-  marqueeLabel: 'Brands Sakshi has collaborated with',
+  head: { eyebrow: 'Successful collaborations', num: '04' } satisfies SectionHead,
+  marqueeLabel: 'Brands I have successfully collaborated with',
   names: ['BBLUNT', 'Zeraki Jewels', 'Seodre', 'Skince', 'Koskii', 'Ghumar Trend'],
 } as const
 
@@ -203,34 +203,56 @@ export const work = {
   titleAccent: 'travel.',
   tileCaption: 'Tap to watch ↗',
   footLink: 'View all on Instagram ↗',
+  carouselLabel: 'Recent reels',
   reels: [
     {
       idx: '01',
-      href: 'https://www.instagram.com/reel/DXKDqctAHn6/',
-      src: '/reels/reel-1.mp4',
-      poster: '/reels/cover-1.jpg',
+      href: site.instagram,
+      src: '/reels/reel-5.mp4',
+      poster: '/reels/cover-5.jpg',
       label: 'Watch reel 1 on Instagram',
     },
     {
       idx: '02',
-      href: 'https://www.instagram.com/reel/DXT7A5UgHin/',
-      src: '/reels/reel-2.mp4',
-      poster: '/reels/cover-2.jpg',
+      href: site.instagram,
+      src: '/reels/reel-6.mp4',
+      poster: '/reels/cover-6.jpg',
       label: 'Watch reel 2 on Instagram',
     },
     {
       idx: '03',
-      href: 'https://www.instagram.com/reel/DXrkvoVArfO/',
-      src: '/reels/reel-3.mp4',
-      poster: '/reels/cover-3.jpg',
+      href: site.instagram,
+      src: '/reels/reel-7.mp4',
+      poster: '/reels/cover-7.jpg',
       label: 'Watch reel 3 on Instagram',
     },
     {
       idx: '04',
+      href: 'https://www.instagram.com/reel/DXKDqctAHn6/',
+      src: '/reels/reel-1.mp4',
+      poster: '/reels/cover-1.jpg',
+      label: 'Watch reel 4 on Instagram',
+    },
+    {
+      idx: '05',
+      href: 'https://www.instagram.com/reel/DXT7A5UgHin/',
+      src: '/reels/reel-2.mp4',
+      poster: '/reels/cover-2.jpg',
+      label: 'Watch reel 5 on Instagram',
+    },
+    {
+      idx: '06',
+      href: 'https://www.instagram.com/reel/DXrkvoVArfO/',
+      src: '/reels/reel-3.mp4',
+      poster: '/reels/cover-3.jpg',
+      label: 'Watch reel 6 on Instagram',
+    },
+    {
+      idx: '07',
       href: 'https://www.instagram.com/reel/DZzjS6JgP-0/',
       src: '/reels/reel-4.mp4',
       poster: '/reels/cover-4.jpg',
-      label: 'Watch reel 4 on Instagram',
+      label: 'Watch reel 7 on Instagram',
     },
   ] satisfies Reel[],
 } as const
@@ -280,8 +302,6 @@ export const contact = {
 
 export const footer = {
   marqueeWord: 'Saqsheee',
-  /** Four copies scroll; the track translates -50% so two are always on screen. */
-  marqueeRepeat: 4,
   copyright: `© ${site.year} ${site.name}`,
   tagline: `${site.niche} — ${site.location}`,
 } as const

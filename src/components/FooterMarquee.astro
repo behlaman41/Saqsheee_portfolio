@@ -1,12 +1,23 @@
 ---
 import { footer } from '../data/site'
 
-/* Purely decorative outline lettering — hidden from assistive tech. */
-const copies = Array.from({ length: footer.marqueeRepeat })
+/* Purely decorative italic accent lettering — hidden from assistive tech.
+   The track scrolls to -50%, so the list is rendered twice. */
+const copies = Array.from({ length: 4 })
+const passes = [false, true]
 ---
 
 <div class="foot-marquee" aria-hidden="true">
   <div class="foot-track">
-    {copies.map(() => <span class="foot-item">{footer.marqueeWord} <em>—</em> </span>)}
+    {
+      passes.map(() =>
+        copies.map(() => (
+          <span class="foot-item">
+            {footer.marqueeWord}
+            <em>—</em>
+          </span>
+        ))
+      )
+    }
   </div>
 </div>
